@@ -1,5 +1,4 @@
 # Build docker image
-Download VPEX from https://github.com/VeriSilicon/VPEX/releases/latest/download/vpex-*.whl into the docker/ directory at first.
 ``` bash
 cd <current_dir>
 docker build -t zen_compiler:latest .
