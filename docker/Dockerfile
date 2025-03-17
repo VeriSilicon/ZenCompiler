@@ -33,6 +33,9 @@ RUN apt-get update && \
 RUN pip3 install --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu && \
     pip3 install --no-cache-dir triton==3.1.0 pybind11 numpy -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 
+#Install vpex
+RUN pip3 install --no-cache-dir vpex -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+
 # Set working directory
 WORKDIR /wksp
 
@@ -48,11 +51,6 @@ RUN ldconfig
 
 # link triton-vsi-backend to triton backends
 RUN ln -s /wksp/triton-vsi-backend/backend /usr/local/lib/python3.10/dist-packages/triton/backends/vsi
-
-# Copy VPEX wheel file from host and install it
-# TODO: download from github releases https://github.com/VeriSilicon/VPEX
-COPY vpex-*.whl /tmp/
-RUN pip3 install /tmp/vpex-*.whl && rm /tmp/vpex-*.whl
 
 # Keep container running
 CMD ["tail", "-f", "/dev/null"]
